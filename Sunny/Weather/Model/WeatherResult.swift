@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct WeatherResult: Decodable {
-    var rowItems: [WeatherRowItem] {
-        return [
-            WeatherRowItem(title: NSLocalizedString("Temperature", comment: ""), value: "\(temperature) °F"),
-            WeatherRowItem(title: NSLocalizedString("Humidity", comment: ""), value: "\(humidity) %"),
-            WeatherRowItem(title: NSLocalizedString("Pressure", comment: ""), value: "\(pressure) hpa"),
-            WeatherRowItem(title: NSLocalizedString("Min. temperature", comment: ""), value: "\(minTemp) °F"),
-            WeatherRowItem(title: NSLocalizedString("Max. temperature", comment: ""), value: "\(maxTemp) °F")
-        ]
+struct WeatherResult: Decodable, Equatable {
+
+    var rowWeatherItem: WeatherRowItem {
+        return WeatherRowItem(title: NSLocalizedString(cityName, comment: ""),
+                              temperature: "\(temperature) °F",
+                              humidity: "\(humidity) %",
+                              pressure: "\(pressure) hpa",
+                              minTemp: "\(minTemp) °F",
+                              maxTemp: "\(maxTemp) °F")
     }
 
     private let temperature: Double
@@ -24,9 +24,11 @@ struct WeatherResult: Decodable {
     private let pressure: Double
     private let minTemp: Double
     private let maxTemp: Double
+    private let cityName: String
 
     private enum MainKeys: String, CodingKey {
         case main
+        case cityName = "name"
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -40,6 +42,7 @@ struct WeatherResult: Decodable {
     init(from decoder: Decoder) throws {
         let mainContainer = try decoder.container(keyedBy: MainKeys.self)
         let container = try mainContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .main)
+        cityName = try mainContainer.decode(String.self, forKey: .cityName)
         temperature = try container.decode(Double.self, forKey: .temperature)
         humidity = try container.decode(Double.self, forKey: .humidity)
         pressure = try container.decode(Double.self, forKey: .pressure)

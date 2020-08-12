@@ -2,14 +2,15 @@
 //  WeatherViewController.swift
 //  Sunny
 //
-//  Created by Polidea on 12/10/2017.
-//  Copyright © 2017 Polidea. All rights reserved.
+//  Created by Kobsonauta on 11/08/2020.
+//  Copyright © 2020 Kacper Harasim. All rights reserved.
 //
 
 import UIKit
 
 final class WeatherViewController: UIViewController {
 
+    private let appContext = AppContext()
     private let dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>
 
     init(dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>) {
@@ -67,7 +68,12 @@ final class WeatherViewController: UIViewController {
 }
 
 extension WeatherViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let weatherDetailVC = appContext.weatherDetailVC
+        let item = dataSource.elements[indexPath.row]
+        weatherDetailVC.items = item.rowWeatherDetailItems
+        self.navigationController?.pushViewController(weatherDetailVC,
+                                                      animated: true)
     }
 }

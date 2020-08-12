@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F5EAAE224E2A8B4006E6E39 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EAAE124E2A8B4006E6E39 /* WeatherViewController.swift */; };
+		8F5EAAEB24E424A2006E6E39 /* WeatherDetailProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EAAEA24E424A2006E6E39 /* WeatherDetailProperty.swift */; };
+		8F5EAAED24E424D1006E6E39 /* WeatherDetailRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EAAEC24E424D1006E6E39 /* WeatherDetailRowItem.swift */; };
 		BB222FC91F90E8E500B80E19 /* WeatherResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB222FC81F90E8E500B80E19 /* WeatherResult.swift */; };
 		BB2873EC1F8F9974005C4209 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2873EB1F8F9974005C4209 /* AppDelegate.swift */; };
 		BB2873F31F8F9974005C4209 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB2873F21F8F9974005C4209 /* Assets.xcassets */; };
@@ -14,7 +17,7 @@
 		BB2874011F8F9974005C4209 /* SunnyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2874001F8F9974005C4209 /* SunnyTests.swift */; };
 		BB28740C1F8F9C0B005C4209 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB28740B1F8F9C0B005C4209 /* AppContext.swift */; };
 		BB2874111F8FB45D005C4209 /* WeatherViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2874101F8FB45D005C4209 /* WeatherViewCell.swift */; };
-		BB2874131F8FB49B005C4209 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2874121F8FB49B005C4209 /* WeatherViewController.swift */; };
+		BB2874131F8FB49B005C4209 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2874121F8FB49B005C4209 /* WeatherDetailViewController.swift */; };
 		BB2874161F8FB577005C4209 /* WeatherProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2874151F8FB577005C4209 /* WeatherProperty.swift */; };
 		BB2874181F8FBB63005C4209 /* WeatherRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2874171F8FBB63005C4209 /* WeatherRowItem.swift */; };
 		BB28741B1F8FBD45005C4209 /* ArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB28741A1F8FBD45005C4209 /* ArrayDataSource.swift */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F5EAAE124E2A8B4006E6E39 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		8F5EAAEA24E424A2006E6E39 /* WeatherDetailProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailProperty.swift; sourceTree = "<group>"; };
+		8F5EAAEC24E424D1006E6E39 /* WeatherDetailRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowItem.swift; sourceTree = "<group>"; };
 		BB222FC81F90E8E500B80E19 /* WeatherResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResult.swift; sourceTree = "<group>"; };
 		BB2873E81F8F9974005C4209 /* Sunny.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunny.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2873EB1F8F9974005C4209 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +54,7 @@
 		BB2874021F8F9974005C4209 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB28740B1F8F9C0B005C4209 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		BB2874101F8FB45D005C4209 /* WeatherViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewCell.swift; sourceTree = "<group>"; };
-		BB2874121F8FB49B005C4209 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		BB2874121F8FB49B005C4209 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		BB2874151F8FB577005C4209 /* WeatherProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProperty.swift; sourceTree = "<group>"; };
 		BB2874171F8FBB63005C4209 /* WeatherRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRowItem.swift; sourceTree = "<group>"; };
 		BB28741A1F8FBD45005C4209 /* ArrayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayDataSource.swift; sourceTree = "<group>"; };
@@ -78,6 +84,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F5EAAE324E41476006E6E39 /* WeatherDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8F5EAAE424E4149C006E6E39 /* Model */,
+				8F5EAAE524E414A4006E6E39 /* View */,
+			);
+			path = WeatherDetail;
+			sourceTree = "<group>";
+		};
+		8F5EAAE424E4149C006E6E39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F5EAAEA24E424A2006E6E39 /* WeatherDetailProperty.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8F5EAAE524E414A4006E6E39 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB2874121F8FB49B005C4209 /* WeatherDetailViewController.swift */,
+				8F5EAAEC24E424D1006E6E39 /* WeatherDetailRowItem.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BB2873DF1F8F9974005C4209 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +133,7 @@
 			children = (
 				BB28740E1F8F9D28005C4209 /* Shared */,
 				BB28740D1F8F9D24005C4209 /* Weather */,
+				8F5EAAE324E41476006E6E39 /* WeatherDetail */,
 				BB2873EB1F8F9974005C4209 /* AppDelegate.swift */,
 				BB28740B1F8F9C0B005C4209 /* AppContext.swift */,
 				BB2873F21F8F9974005C4209 /* Assets.xcassets */,
@@ -143,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2874101F8FB45D005C4209 /* WeatherViewCell.swift */,
-				BB2874121F8FB49B005C4209 /* WeatherViewController.swift */,
+				8F5EAAE124E2A8B4006E6E39 /* WeatherViewController.swift */,
 				BB2874171F8FBB63005C4209 /* WeatherRowItem.swift */,
 			);
 			path = View;
@@ -290,18 +323,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2874111F8FB45D005C4209 /* WeatherViewCell.swift in Sources */,
+				8F5EAAE224E2A8B4006E6E39 /* WeatherViewController.swift in Sources */,
 				BB2874161F8FB577005C4209 /* WeatherProperty.swift in Sources */,
 				BB2874231F90ABBB005C4209 /* GetEndpoint.swift in Sources */,
-				BB2874131F8FB49B005C4209 /* WeatherViewController.swift in Sources */,
+				BB2874131F8FB49B005C4209 /* WeatherDetailViewController.swift in Sources */,
 				BB2874281F90B2C5005C4209 /* WeatherService.swift in Sources */,
 				BB2873EC1F8F9974005C4209 /* AppDelegate.swift in Sources */,
 				BB28741B1F8FBD45005C4209 /* ArrayDataSource.swift in Sources */,
+				8F5EAAED24E424D1006E6E39 /* WeatherDetailRowItem.swift in Sources */,
 				BB2874211F90ABA8005C4209 /* HTTPClient.swift in Sources */,
 				BB28741E1F90AA22005C4209 /* UpdatableArrayDataSource.swift in Sources */,
 				BB28742A1F90B2CB005C4209 /* LocationService.swift in Sources */,
 				BB2874181F8FBB63005C4209 /* WeatherRowItem.swift in Sources */,
 				BB222FC91F90E8E500B80E19 /* WeatherResult.swift in Sources */,
 				BB28740C1F8F9C0B005C4209 /* AppContext.swift in Sources */,
+				8F5EAAEB24E424A2006E6E39 /* WeatherDetailProperty.swift in Sources */,
 				BB2874251F90ACB6005C4209 /* Result.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,7 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2B8MJYSN8Z;
 				INFOPLIST_FILE = Sunny/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidea.sunny.Sunny;
@@ -467,7 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2B8MJYSN8Z;
 				INFOPLIST_FILE = Sunny/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polidea.sunny.Sunny;

@@ -23,10 +23,21 @@ final class AppContext {
                     return
                 }
                 cell.update(with: item)
-            }
-        )
-
+        })
         return WeatherViewController(dataSource: dataSource)
+    }()
+
+    lazy var weatherDetailVC: WeatherDetailViewController = {
+        let dataSource = ArrayDataSource<WeatherDetailRowItem>(cellIdentifier: WeatherViewCell.identifier,
+                                                               elements: [],
+                                                               editable: false,
+                                                               configureCellBlock: { (cell, item) in
+                                                                guard let cell = cell as? WeatherViewCell else {
+                                                                    return
+                                                                }
+                                                                cell.update(with: item)
+        })
+        return WeatherDetailViewController(dataSource: dataSource)
     }()
 
     private lazy var client = HTTPClient()

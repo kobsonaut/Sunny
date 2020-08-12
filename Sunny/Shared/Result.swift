@@ -23,8 +23,6 @@ extension Result {
         }
     }
 
-    
-
     func mapBoth<R, D>(_ left: (T) -> R, right: (E) -> D) -> Result<R, D> {
         switch self {
         case let .success(value):

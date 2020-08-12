@@ -31,6 +31,7 @@ class UpdatableArrayDataSource<Item, ReloadError: Error>: ArrayDataSource<Item> 
         }
         super.init(cellIdentifier: cellIdentifier,
                    elements: elements,
+                   editable: true,
                    configureCellBlock: configureCellBlock)
         dataProvider.registerDataObserver { [weak self] result in
             switch result {

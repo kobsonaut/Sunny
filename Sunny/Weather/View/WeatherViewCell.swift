@@ -15,6 +15,7 @@ final class WeatherViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         setupConstraints()
     }
 
@@ -44,6 +45,11 @@ final class WeatherViewCell: UITableViewCell {
 
 extension WeatherViewCell {
     func update(with item: WeatherRowItem) {
+        valueLabel.text = item.title
+        descriptionLabel.text = item.temperature
+    }
+
+    func update(with item: WeatherDetailRowItem) {
         valueLabel.text = item.title
         descriptionLabel.text = item.value
     }
