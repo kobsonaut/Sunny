@@ -35,7 +35,7 @@ final class WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        title = NSLocalizedString("Sunny", comment: "Sunny")
+        title = NSLocalizedString("Sunny", comment: "")
     }
 
     private func configureTableView() {

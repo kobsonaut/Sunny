@@ -44,7 +44,7 @@ final class WeatherService: ArrayDataProvider {
 
     var observer: WeatherRowItemsObserver?
 
-    init(locationService: LocationService, httpClient: HTTPClient) {
+    init(locationService: LocationService = LocationService(), httpClient: HTTPClient = HTTPClient()) {
         self.locationService = locationService
         self.httpClient = httpClient
     }
@@ -56,15 +56,19 @@ final class WeatherService: ArrayDataProvider {
     func refreshData() {
         items.removeAll()
         sendLocationRequest()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
             let cities = ["Szczecin", "Warsaw", "Berlin", "Londyn", "Paris"]
             for city in cities {
-                self.requestWeatherData(for: city)
+                self?.requestWeatherData(for: city)
             }
         }
     }
 
-    func mapWeatherResults(weather: WeatherResult) -> [WeatherRowItem] {
+    func addCityWeather(for city: String) {
+        requestWeatherData(for: city)
+    }
+
+    private func mapWeatherResults(weather: WeatherResult) -> [WeatherRowItem] {
         if !items.contains(weather) {
             items.append(weather)
         }

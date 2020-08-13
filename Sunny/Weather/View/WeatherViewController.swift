@@ -12,9 +12,12 @@ final class WeatherViewController: UIViewController {
 
     private let appContext = AppContext()
     private let dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>
+    private let alertService = AlertService()
+    private var weatherService = WeatherService()
 
-    init(dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>) {
+    init(dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>, weatherService: WeatherService) {
         self.dataSource = dataSource
+        self.weatherService = weatherService
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -41,7 +44,8 @@ final class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        title = NSLocalizedString("Sunny", comment: "Sunny")
+        addNavbarItems()
+        title = NSLocalizedString("Sunny", comment: "")
         dataSource.reload()
     }
 
@@ -64,6 +68,19 @@ final class WeatherViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         })
+    }
+
+    func addNavbarItems() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: #selector(didTapAddButton))
+    }
+
+    @objc private func didTapAddButton() {
+        let alert = alertService.createLocationAlert { (cityName) in
+            self.weatherService.addCityWeather(for: cityName)
+        }
+        present(alert, animated: true)
     }
 }
 

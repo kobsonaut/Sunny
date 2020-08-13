@@ -11,20 +11,20 @@ import Foundation
 final class AppContext {
 
     lazy var weatherVC: WeatherViewController = {
+        let weatherService = WeatherService(
+                             locationService: locationService,
+                             httpClient: client)
         let dataSource = UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>(
             cellIdentifier: WeatherViewCell.identifier,
             elements: [],
-            dataProvider: WeatherService(
-                locationService: locationService,
-                httpClient: client
-            ),
+            dataProvider: weatherService,
             configureCellBlock: { (cell, item) in
                 guard let cell = cell as? WeatherViewCell else {
                     return
                 }
                 cell.update(with: item)
         })
-        return WeatherViewController(dataSource: dataSource)
+        return WeatherViewController(dataSource: dataSource, weatherService: weatherService)
     }()
 
     lazy var weatherDetailVC: WeatherDetailViewController = {
