@@ -9,16 +9,6 @@
 import Foundation
 
 struct WeatherResult: Decodable, Equatable {
-
-    var rowWeatherItem: WeatherRowItem {
-        return WeatherRowItem(title: NSLocalizedString(cityName, comment: ""),
-                              temperature: "\(temperature) °F",
-                              humidity: "\(humidity) %",
-                              pressure: "\(pressure) hpa",
-                              minTemp: "\(minTemp) °F",
-                              maxTemp: "\(maxTemp) °F")
-    }
-
     private let temperature: Double
     private let humidity: Double
     private let pressure: Double
@@ -37,6 +27,19 @@ struct WeatherResult: Decodable, Equatable {
         case pressure = "pressure"
         case minTemp = "temp_min"
         case maxTemp = "temp_max"
+    }
+
+    var rowWeatherItem: WeatherRowItem {
+        return WeatherRowItem(title: NSLocalizedString(cityName, comment: ""),
+                              temperature: "\(temperature) °C",
+                              humidity: "\(humidity) %",
+                              pressure: "\(pressure) hpa",
+                              minTemp: "\(minTemp) °C",
+                              maxTemp: "\(maxTemp) °C")
+    }
+
+    var cityTitle: String {
+        return cityName
     }
 
     init(from decoder: Decoder) throws {

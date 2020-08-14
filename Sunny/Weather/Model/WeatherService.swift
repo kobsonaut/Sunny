@@ -10,23 +10,20 @@ import Foundation
 import CoreLocation
 
 struct WeatherServiceEndpoints {
-    private static let baseURL = "http://api.openweathermap.org/data/2.5/weather"
-    private static let appId = "4e41c354247b9bff4a9fa26f51307ec7"
-    private static let weatherUnit = "imperial"
-
     static func getWeather(for location: CLLocation) -> GetEndpoint<WeatherResult> {
-        return GetEndpoint(path: baseURL, parameters: [
+        return GetEndpoint(path: Configuration.Server.baseURL, parameters: [
             "lat": location.coordinate.latitude,
             "lon": location.coordinate.longitude,
-            "APPID": appId
+            "units": Configuration.Settings.useCelciusUnits,
+            "APPID": Configuration.Server.appId
         ])
     }
 
     static func getWeather(for city: String) -> GetEndpoint<WeatherResult> {
-        return GetEndpoint(path: baseURL, parameters: [
+        return GetEndpoint(path: Configuration.Server.baseURL, parameters: [
             "q": city,
-            "units": weatherUnit,
-            "APPID": appId
+            "units": Configuration.Settings.useCelciusUnits,
+            "APPID": Configuration.Server.appId
         ])
     }
 }
@@ -37,11 +34,14 @@ enum WeatherServiceError: Error {
 }
 
 final class WeatherService: ArrayDataProvider {
+    enum Constants {
+        static let storeCitiesArrayKey = "storeCitiesArray"
+    }
+
     private let locationService: LocationService
     private let httpClient: HTTPClient
-    private var items = [WeatherResult]()
+    var items = [WeatherResult]()
     typealias WeatherRowItemsObserver = (Result<[WeatherRowItem], WeatherServiceError>) -> Void
-
     var observer: WeatherRowItemsObserver?
 
     init(locationService: LocationService = LocationService(), httpClient: HTTPClient = HTTPClient()) {
@@ -54,13 +54,11 @@ final class WeatherService: ArrayDataProvider {
     }
 
     func refreshData() {
-        items.removeAll()
+        synchronizeData()
         sendLocationRequest()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            let cities = ["Szczecin", "Warsaw", "Berlin", "Londyn", "Paris"]
-            for city in cities {
-                self?.requestWeatherData(for: city)
-            }
+        let cities = UserDefaults.standard.userPreferences
+        for city in cities {
+            requestWeatherData(for: city)
         }
     }
 
@@ -69,11 +67,29 @@ final class WeatherService: ArrayDataProvider {
     }
 
     private func mapWeatherResults(weather: WeatherResult) -> [WeatherRowItem] {
+        let storedArray = UserDefaults.standard.userPreferences
+        if !storedArray.contains(weather.cityTitle) {
+            PersistanceService.saveCityWeather(city: weather.cityTitle, forKey: Constants.storeCitiesArrayKey)
+            items.append(weather)
+        }
+
         if !items.contains(weather) {
             items.append(weather)
         }
-        let mapped = self.items.map { $0.rowWeatherItem }
+
+        let mapped = items.map { $0.rowWeatherItem }
         return mapped
+    }
+
+    private func synchronizeData() {
+        let storedArray = UserDefaults.standard.userPreferences
+        items.forEach { (item) in
+            if storedArray.contains(item.cityTitle) {
+                return
+            }
+            let filtered = items.filter { $0 != item }
+            items = filtered
+        }
     }
 
     private func sendLocationRequest() {

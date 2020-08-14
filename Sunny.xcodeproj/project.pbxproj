@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F330DFE24E55FAA00DACEEF /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F330DFD24E55FAA00DACEEF /* PersistanceService.swift */; };
+		8F4D842924E6F1C9009929F8 /* UpdatableWeatherArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D842824E6F1C9009929F8 /* UpdatableWeatherArrayDataSource.swift */; };
+		8F4D842C24E6F7E3009929F8 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D842B24E6F7E3009929F8 /* Configuration.swift */; };
 		8F5EAAE224E2A8B4006E6E39 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EAAE124E2A8B4006E6E39 /* WeatherViewController.swift */; };
 		8F5EAAEB24E424A2006E6E39 /* WeatherDetailProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EAAEA24E424A2006E6E39 /* WeatherDetailProperty.swift */; };
 		8F5EAAED24E424D1006E6E39 /* WeatherDetailRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EAAEC24E424D1006E6E39 /* WeatherDetailRowItem.swift */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F330DFD24E55FAA00DACEEF /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		8F4D842824E6F1C9009929F8 /* UpdatableWeatherArrayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatableWeatherArrayDataSource.swift; sourceTree = "<group>"; };
+		8F4D842B24E6F7E3009929F8 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		8F5EAAE124E2A8B4006E6E39 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		8F5EAAEA24E424A2006E6E39 /* WeatherDetailProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailProperty.swift; sourceTree = "<group>"; };
 		8F5EAAEC24E424D1006E6E39 /* WeatherDetailRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowItem.swift; sourceTree = "<group>"; };
@@ -86,6 +92,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F330DFC24E55F8D00DACEEF /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				8F330DFD24E55FAA00DACEEF /* PersistanceService.swift */,
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
+		8F4D842A24E6F7D7009929F8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				8F4D842B24E6F7E3009929F8 /* Configuration.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		8F5EAAE324E41476006E6E39 /* WeatherDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +196,8 @@
 		BB28740E1F8F9D28005C4209 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8F4D842A24E6F7D7009929F8 /* Constants */,
+				8F330DFC24E55F8D00DACEEF /* Persistance */,
 				8F5EAAEE24E44277006E6E39 /* Alert */,
 				BB2874261F90B296005C4209 /* Location */,
 				BB28741F1F90AB80005C4209 /* HTTP */,
@@ -187,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2874101F8FB45D005C4209 /* WeatherViewCell.swift */,
+				8F4D842824E6F1C9009929F8 /* UpdatableWeatherArrayDataSource.swift */,
 				8F5EAAE124E2A8B4006E6E39 /* WeatherViewController.swift */,
 				BB2874171F8FBB63005C4209 /* WeatherRowItem.swift */,
 			);
@@ -342,13 +367,16 @@
 				BB2873EC1F8F9974005C4209 /* AppDelegate.swift in Sources */,
 				BB28741B1F8FBD45005C4209 /* ArrayDataSource.swift in Sources */,
 				8F5EAAED24E424D1006E6E39 /* WeatherDetailRowItem.swift in Sources */,
+				8F330DFE24E55FAA00DACEEF /* PersistanceService.swift in Sources */,
 				BB2874211F90ABA8005C4209 /* HTTPClient.swift in Sources */,
+				8F4D842C24E6F7E3009929F8 /* Configuration.swift in Sources */,
 				BB28741E1F90AA22005C4209 /* UpdatableArrayDataSource.swift in Sources */,
 				BB28742A1F90B2CB005C4209 /* LocationService.swift in Sources */,
 				BB2874181F8FBB63005C4209 /* WeatherRowItem.swift in Sources */,
 				BB222FC91F90E8E500B80E19 /* WeatherResult.swift in Sources */,
 				BB28740C1F8F9C0B005C4209 /* AppContext.swift in Sources */,
 				8F5EAAEB24E424A2006E6E39 /* WeatherDetailProperty.swift in Sources */,
+				8F4D842924E6F1C9009929F8 /* UpdatableWeatherArrayDataSource.swift in Sources */,
 				8F5EAAF024E44288006E6E39 /* AlertService.swift in Sources */,
 				BB2874251F90ACB6005C4209 /* Result.swift in Sources */,
 			);

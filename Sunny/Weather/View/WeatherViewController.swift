@@ -70,7 +70,7 @@ final class WeatherViewController: UIViewController {
         })
     }
 
-    func addNavbarItems() {
+    private func addNavbarItems() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAddButton))

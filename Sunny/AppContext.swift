@@ -14,7 +14,7 @@ final class AppContext {
         let weatherService = WeatherService(
                              locationService: locationService,
                              httpClient: client)
-        let dataSource = UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>(
+        let dataSource = UpdatableWeatherArrayDataSource(
             cellIdentifier: WeatherViewCell.identifier,
             elements: [],
             dataProvider: weatherService,
@@ -30,7 +30,6 @@ final class AppContext {
     lazy var weatherDetailVC: WeatherDetailViewController = {
         let dataSource = ArrayDataSource<WeatherDetailRowItem>(cellIdentifier: WeatherViewCell.identifier,
                                                                elements: [],
-                                                               editable: false,
                                                                configureCellBlock: { (cell, item) in
                                                                 guard let cell = cell as? WeatherViewCell else {
                                                                     return

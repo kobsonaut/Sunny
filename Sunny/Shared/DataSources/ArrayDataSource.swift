@@ -14,14 +14,11 @@ class ArrayDataSource<Item>: NSObject, UITableViewDataSource {
     private var configureBlock: TableViewCellConfigureBlock
     let cellReuseIdentifier: String
     var elements = [Item]()
-    private var editable = false
 
     init(cellIdentifier: String,
          elements: [Item],
-         editable: Bool,
          configureCellBlock: @escaping TableViewCellConfigureBlock) {
         self.elements = elements
-        self.editable = editable
         cellReuseIdentifier = cellIdentifier
         configureBlock = configureCellBlock
         super.init()
@@ -39,13 +36,10 @@ class ArrayDataSource<Item>: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return editable
+        return false
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            elements.remove(at: indexPath.row)
-            tableView.reloadData()
-        }
+        
     }
 }
