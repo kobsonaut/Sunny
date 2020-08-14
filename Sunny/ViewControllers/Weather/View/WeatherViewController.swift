@@ -10,7 +10,10 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
 
-    private let appContext = AppContext()
+    private enum Constants {
+        static let rowHeight = CGFloat(100.0)
+    }
+
     private let dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>
     private let alertService = AlertService()
     private var weatherService = WeatherService()
@@ -37,6 +40,7 @@ final class WeatherViewController: UIViewController {
         let control = UIRefreshControl()
         self.refreshControl = control
         control.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        control.tintColor = .clientWhite
         tableView.addSubview(control)
         view = tableView
     }
@@ -45,8 +49,12 @@ final class WeatherViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         addNavbarItems()
-        title = NSLocalizedString("Sunny", comment: "")
+        title = LanguageManager.shared.localizedString(forKey: "lang_weather_title")
         dataSource.reload()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
     }
 
     @objc private func handleRefresh() {
@@ -58,6 +66,9 @@ final class WeatherViewController: UIViewController {
         tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.separatorStyle = .none
+        let bgImage = UIImageView(image: UIImage(named: "sky-bg"))
+        bgImage.frame = self.tableView.frame
+        self.tableView.backgroundView = bgImage
         dataSource.registerReloadFinishedCallback({ [weak self] error in
             if self?.refreshControl.isRefreshing == true {
                 self?.refreshControl.endRefreshing()
@@ -87,10 +98,13 @@ final class WeatherViewController: UIViewController {
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let weatherDetailVC = appContext.weatherDetailVC
         let item = dataSource.elements[indexPath.row]
-        weatherDetailVC.items = item.rowWeatherDetailItems
+        let weatherDetailVC = AppContext.weatherDetailVC(items: item.rowWeatherDetailItems)
         self.navigationController?.pushViewController(weatherDetailVC,
                                                       animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.rowHeight
     }
 }

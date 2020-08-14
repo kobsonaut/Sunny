@@ -9,7 +9,6 @@
 import UIKit
 
 class ArrayDataSource<Item>: NSObject, UITableViewDataSource {
-
     typealias TableViewCellConfigureBlock = (_ cell: UITableViewCell, _ item: Item) -> Void
     private var configureBlock: TableViewCellConfigureBlock
     let cellReuseIdentifier: String
@@ -40,6 +39,6 @@ class ArrayDataSource<Item>: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
+    
     }
 }

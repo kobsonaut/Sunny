@@ -11,7 +11,11 @@ import UIKit
 
 class UpdatableWeatherArrayDataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if indexPath.row != 0 {
+            return true
+        } else {
+            return false
+        }
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

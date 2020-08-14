@@ -21,6 +21,19 @@ extension UserDefaults {
             UserDefaults.standard.set(newValue, forKey: WeatherService.Constants.storeCitiesArrayKey)
         }
     }
+
+    var currentLocation: String {
+        get {
+            if let location = UserDefaults.standard.object(forKey: WeatherService.Constants.currentLocationKey) as? String {
+                return location
+            } else {
+                return ""
+            }
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: WeatherService.Constants.currentLocationKey)
+        }
+    }
 }
 
 class PersistanceService {

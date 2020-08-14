@@ -15,7 +15,7 @@ final class AppContext {
                              locationService: locationService,
                              httpClient: client)
         let dataSource = UpdatableWeatherArrayDataSource(
-            cellIdentifier: WeatherViewCell.identifier,
+            cellIdentifier: WeatherViewCell.reuseID,
             elements: [],
             dataProvider: weatherService,
             configureCellBlock: { (cell, item) in
@@ -27,17 +27,17 @@ final class AppContext {
         return WeatherViewController(dataSource: dataSource, weatherService: weatherService)
     }()
 
-    lazy var weatherDetailVC: WeatherDetailViewController = {
-        let dataSource = ArrayDataSource<WeatherDetailRowItem>(cellIdentifier: WeatherViewCell.identifier,
-                                                               elements: [],
+    static func weatherDetailVC(items: [WeatherDetailRowItem]) -> WeatherDetailViewController {
+        let dataSource = ArrayDataSource<WeatherDetailRowItem>(cellIdentifier: WeatherDetailViewCell.reuseID,
+                                                               elements: items,
                                                                configureCellBlock: { (cell, item) in
-                                                                guard let cell = cell as? WeatherViewCell else {
+                                                                guard let cell = cell as? WeatherDetailViewCell else {
                                                                     return
                                                                 }
                                                                 cell.update(with: item)
         })
         return WeatherDetailViewController(dataSource: dataSource)
-    }()
+    }
 
     private lazy var client = HTTPClient()
     private lazy var locationService = LocationService()

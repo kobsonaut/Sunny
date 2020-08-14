@@ -10,8 +10,11 @@ import UIKit
 
 final class WeatherDetailViewController: UIViewController {
 
+    private enum Constants {
+        static let rowHeight = CGFloat(50.0)
+    }
+
     private let dataSource: ArrayDataSource<WeatherDetailRowItem>
-    var items = [WeatherDetailRowItem]()
 
     init(dataSource: ArrayDataSource<WeatherDetailRowItem>) {
         self.dataSource = dataSource
@@ -35,20 +38,26 @@ final class WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        title = NSLocalizedString("Sunny", comment: "")
+        title = LanguageManager.shared.localizedString(forKey: "lang_weather_title")
     }
 
     private func configureTableView() {
-        tableView.register(WeatherViewCell.self, forCellReuseIdentifier: dataSource.cellReuseIdentifier)
-        dataSource.elements = items
+        tableView.register(WeatherDetailViewCell.self, forCellReuseIdentifier: dataSource.cellReuseIdentifier)
         tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.separatorStyle = .none
+        let bgImage = UIImageView(image: UIImage(named: "sky-bg"))
+        bgImage.frame = self.tableView.frame
+        self.tableView.backgroundView = bgImage
     }
 }
 
 extension WeatherDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.rowHeight
     }
 }

@@ -1,26 +1,44 @@
 //
-//  WeatherViewCell.swift
+//  WeatherDetailViewCell.swift
 //  Sunny
 //
-//  Created by Polidea on 12/10/2017.
-//  Copyright © 2017 Polidea. All rights reserved.
+//  Created by Kobsonauta on 14/08/2020.
+//  Copyright © 2020 Kacper Harasim. All rights reserved.
 //
 
 import UIKit
 
-final class WeatherViewCell: UITableViewCell {
+final class WeatherDetailViewCell: UITableViewCell {
 
-    private let valueLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private var valueLabel = UILabel()
+    private var descriptionLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        setupConstraints()
+        initializeCell()
     }
 
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func initializeCell() {
+        backgroundColor = UIColor.clear
+        selectionStyle = .none
+
+        let desc = UILabel()
+        desc.textColor = UIColor.clientWhite
+        desc.font = UIFont.clientRegular.withSize(20.0)
+        desc.textAlignment = .right
+        descriptionLabel = desc
+
+        let value = UILabel()
+        value.textColor = UIColor.clientWhite
+        value.font = UIFont.clientBold.withSize(20.0)
+        value.textAlignment = .left
+        valueLabel = value
+
+        setupConstraints()
     }
 
     private func setupConstraints() {
@@ -43,18 +61,9 @@ final class WeatherViewCell: UITableViewCell {
     }
 }
 
-extension WeatherViewCell {
-    func update(with item: WeatherRowItem) {
-        valueLabel.text = item.title
-        descriptionLabel.text = item.temperature
-    }
-
+extension WeatherDetailViewCell {
     func update(with item: WeatherDetailRowItem) {
         valueLabel.text = item.title
         descriptionLabel.text = item.value
-    }
-
-    static var identifier: String {
-        return String(describing: WeatherViewCell.self)
     }
 }

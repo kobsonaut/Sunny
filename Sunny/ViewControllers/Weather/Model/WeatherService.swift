@@ -36,6 +36,7 @@ enum WeatherServiceError: Error {
 final class WeatherService: ArrayDataProvider {
     enum Constants {
         static let storeCitiesArrayKey = "storeCitiesArray"
+        static let currentLocationKey = "currentLocationKey"
     }
 
     private let locationService: LocationService
@@ -77,6 +78,12 @@ final class WeatherService: ArrayDataProvider {
             items.append(weather)
         }
 
+        for (index, item) in items.enumerated() {
+            if item.cityTitle == UserDefaults.standard.currentLocation {
+                items.swapAt(index, 0)
+            }
+        }
+
         let mapped = items.map { $0.rowWeatherItem }
         return mapped
     }
@@ -114,6 +121,7 @@ final class WeatherService: ArrayDataProvider {
             case .success(let weather):
                 guard let mapped = self?.mapWeatherResults(weather: weather) else { return }
                 self?.observer?(.success(mapped))
+                UserDefaults.standard.currentLocation = weather.cityTitle
                 break
             case .error(let error):
                 self?.observer?(.error(.network(error)))

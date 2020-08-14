@@ -23,6 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationVC = UINavigationController(rootViewController: weatherVC)
         window?.rootViewController = navigationVC
         window?.makeKeyAndVisible()
+        customizeNavigationBar()
         return true
+    }
+
+    private func customizeNavigationBar() {
+        // Navigation bar
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = .clientWhite
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clientWhite]
+        navigationBarAppearace.barTintColor = .clientMain
+        navigationBarAppearace.isTranslucent = false
+        navigationBarAppearace.barStyle = .black
+        navigationBarAppearace.setBackgroundImage(UIImage(), for:.default)
+        navigationBarAppearace.shadowImage = UIImage()
     }
 }

@@ -30,12 +30,12 @@ struct WeatherResult: Decodable, Equatable {
     }
 
     var rowWeatherItem: WeatherRowItem {
-        return WeatherRowItem(title: NSLocalizedString(cityName, comment: ""),
-                              temperature: "\(temperature) °C",
+        return WeatherRowItem(title: cityName,
+                              temperature: temperature.roundedCelcius,
                               humidity: "\(humidity) %",
                               pressure: "\(pressure) hpa",
-                              minTemp: "\(minTemp) °C",
-                              maxTemp: "\(maxTemp) °C")
+                              minTemp: minTemp.roundedCelcius,
+                              maxTemp: maxTemp.roundedCelcius)
     }
 
     var cityTitle: String {

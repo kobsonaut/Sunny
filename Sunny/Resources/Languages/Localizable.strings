@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  Sunny
+
+  Created by Kobsonauta on 14/08/2020.
+  Copyright © 2020 Kacper Harasim. All rights reserved.
+*/
+
+// Weather - Home
+"lang_weather_title" = "Sunny";
+"lang_add_weather_alert_title" = "Add Weather Forecast";
+"lang_add_weather_alert_placeholder" = "Enter City Name";
+"lang_add_weather_alert_button" = "Save";
+
+// Weather - Detail
+"lang_detail_temperature" = "Temperature";
+"lang_detail_humidity" = "Humidity";
+"lang_detail_pressure" = "Pressure";
+"lang_detail_min_temp" = "Min. temperature";
+"lang_detail_max_temp" = "Max. temperature";
+
