@@ -41,7 +41,7 @@ final class WeatherService: ArrayDataProvider {
 
     private let locationService: LocationService
     private let httpClient: HTTPClient
-    var items = [WeatherResult]()
+    var weatherViewModels = WeatherRowItems()
     typealias WeatherRowItemsObserver = (Result<[WeatherRowItem], WeatherServiceError>) -> Void
     var observer: WeatherRowItemsObserver?
 
@@ -55,7 +55,6 @@ final class WeatherService: ArrayDataProvider {
     }
 
     func refreshData() {
-        synchronizeData()
         sendLocationRequest()
         let cities = UserDefaults.standard.userPreferences
         for city in cities {
@@ -67,36 +66,28 @@ final class WeatherService: ArrayDataProvider {
         requestWeatherData(for: city)
     }
 
-    private func mapWeatherResults(weather: WeatherResult) -> [WeatherRowItem] {
-        let storedArray = UserDefaults.standard.userPreferences
-        if !storedArray.contains(weather.cityTitle) {
-            PersistanceService.saveCityWeather(city: weather.cityTitle, forKey: Constants.storeCitiesArrayKey)
-            items.append(weather)
-        }
-
-        if !items.contains(weather) {
-            items.append(weather)
-        }
-
-        for (index, item) in items.enumerated() {
-            if item.cityTitle == UserDefaults.standard.currentLocation {
-                items.swapAt(index, 0)
-            }
-        }
-
-        let mapped = items.map { $0.rowWeatherItem }
-        return mapped
+    func removeWeatherFromTheList(weather: WeatherRowItem) {
+        weatherViewModels.removeWeatherItem(item: weather)
     }
 
-    private func synchronizeData() {
-        let storedArray = UserDefaults.standard.userPreferences
-        items.forEach { (item) in
-            if storedArray.contains(item.cityTitle) {
-                return
+    private func validateWeatherResults(weather: WeatherResult) -> [WeatherRowItem] {
+        let rowItem = WeatherRowItem(weather: weather.weatherProperty)
+
+        // Check if the list contains the weather location
+        if weatherViewModels.containsWeatherLocation(rowItem) == false {
+            // Set current location as the first one
+            if rowItem.title == UserDefaults.standard.currentLocation {
+                weatherViewModels.insertWeatherLocation(rowItem)
+            } else {
+                weatherViewModels.addWeatherRowItem(rowItem)
             }
-            let filtered = items.filter { $0 != item }
-            items = filtered
+
+            // Save user preferences
+            PersistanceService.saveCityWeather(city: rowItem.title,
+                                               forKey: Constants.storeCitiesArrayKey)
         }
+
+        return weatherViewModels.getWeatherItems
     }
 
     private func sendLocationRequest() {
@@ -119,7 +110,7 @@ final class WeatherService: ArrayDataProvider {
         httpClient.performRequest(for: endpoint, completion: { [weak self] result in
             switch result {
             case .success(let weather):
-                guard let mapped = self?.mapWeatherResults(weather: weather) else { return }
+                guard let mapped = self?.validateWeatherResults(weather: weather) else { return }
                 self?.observer?(.success(mapped))
                 UserDefaults.standard.currentLocation = weather.cityTitle
                 break
@@ -135,7 +126,7 @@ final class WeatherService: ArrayDataProvider {
         httpClient.performRequest(for: endpoint, completion: { [weak self] result in
             switch result {
             case .success(let weather):
-                guard let mapped = self?.mapWeatherResults(weather: weather) else { return }
+                guard let mapped = self?.validateWeatherResults(weather: weather) else { return }
                 self?.observer?(.success(mapped))
                 break
             case .error(let error):

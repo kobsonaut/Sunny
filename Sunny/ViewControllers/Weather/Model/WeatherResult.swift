@@ -29,15 +29,6 @@ struct WeatherResult: Decodable, Equatable {
         case maxTemp = "temp_max"
     }
 
-    var rowWeatherItem: WeatherRowItem {
-        return WeatherRowItem(title: cityName,
-                              temperature: temperature.roundedCelcius,
-                              humidity: "\(humidity) %",
-                              pressure: "\(pressure) hpa",
-                              minTemp: minTemp.roundedCelcius,
-                              maxTemp: maxTemp.roundedCelcius)
-    }
-
     var cityTitle: String {
         return cityName
     }
@@ -51,5 +42,14 @@ struct WeatherResult: Decodable, Equatable {
         pressure = try container.decode(Double.self, forKey: .pressure)
         minTemp = try container.decode(Double.self, forKey: .minTemp)
         maxTemp = try container.decode(Double.self, forKey: .maxTemp)
+    }
+
+    var weatherProperty: WeatherProperty {
+        return WeatherProperty(title: cityName,
+                               temperature: temperature,
+                               humidity: humidity,
+                               pressure: pressure,
+                               minTemp: minTemp,
+                               maxTemp: maxTemp)
     }
 }

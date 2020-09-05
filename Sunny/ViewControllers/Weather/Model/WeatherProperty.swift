@@ -9,9 +9,10 @@
 import Foundation
 
 struct WeatherProperty {
-    let temperature: String
-    let humidity: String
-    let pressure: String
-    let minTemp: String
-    let maxTemp: String
+    let title: String
+    let temperature: Double
+    let humidity: Double
+    let pressure: Double
+    let minTemp: Double
+    let maxTemp: Double
 }

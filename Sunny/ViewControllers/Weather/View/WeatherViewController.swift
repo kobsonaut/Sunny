@@ -9,16 +9,15 @@
 import UIKit
 
 final class WeatherViewController: UIViewController {
-
     private enum Constants {
         static let rowHeight = CGFloat(100.0)
     }
 
-    private let dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>
+    private let dataSource: UpdatableWeatherArrayDataSource
     private let alertService = AlertService()
     private var weatherService = WeatherService()
 
-    init(dataSource: UpdatableArrayDataSource<WeatherRowItem, WeatherServiceError>, weatherService: WeatherService) {
+    init(dataSource: UpdatableWeatherArrayDataSource, weatherService: WeatherService) {
         self.dataSource = dataSource
         self.weatherService = weatherService
         super.init(nibName: nil, bundle: nil)
@@ -69,6 +68,7 @@ final class WeatherViewController: UIViewController {
         let bgImage = UIImageView(image: UIImage(named: "sky-bg"))
         bgImage.frame = self.tableView.frame
         self.tableView.backgroundView = bgImage
+        dataSource.delegate = self
         dataSource.registerReloadFinishedCallback({ [weak self] error in
             if self?.refreshControl.isRefreshing == true {
                 self?.refreshControl.endRefreshing()
@@ -106,5 +106,11 @@ extension WeatherViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Constants.rowHeight
+    }
+}
+
+extension WeatherViewController: UpdatableWeatherArrayDataSourceDelegate {
+    func removeRow(weather: WeatherRowItem) {
+        weatherService.removeWeatherFromTheList(weather: weather)
     }
 }
