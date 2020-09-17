@@ -74,7 +74,9 @@ final class WeatherViewController: UIViewController {
                 self?.refreshControl.endRefreshing()
             }
             if let error = error {
-                print("Error while getting the data: \(error)")
+                if let alert = self?.alertService.createCityNameAlert(error: error) {
+                    self?.present(alert, animated: false)
+                }
             } else {
                 self?.tableView.reloadData()
             }

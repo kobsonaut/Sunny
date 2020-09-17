@@ -41,13 +41,15 @@ final class WeatherService: ArrayDataProvider {
 
     private let locationService: LocationService
     private let httpClient: HTTPClient
+    private let alertService: AlertService
     var weatherViewModels = WeatherRowItems()
     typealias WeatherRowItemsObserver = (Result<[WeatherRowItem], WeatherServiceError>) -> Void
     var observer: WeatherRowItemsObserver?
 
-    init(locationService: LocationService = LocationService(), httpClient: HTTPClient = HTTPClient()) {
+    init(locationService: LocationService = LocationService(), httpClient: HTTPClient = HTTPClient(), alertService: AlertService = AlertService()) {
         self.locationService = locationService
         self.httpClient = httpClient
+        self.alertService = alertService
     }
 
     func registerDataObserver(_ observer: @escaping WeatherRowItemsObserver) {

@@ -12,6 +12,15 @@
 "lang_add_weather_alert_placeholder" = "Enter City Name";
 "lang_add_weather_alert_button" = "Save";
 
+"lang_add_weather_error_alert_title" = "Oops! Something went wrong.";
+"lang_add_weather_error_alert_description_404" = "Make sure your search is spelled correctly.";
+"lang_add_weather_error_alert_description_400" = "Make sure your search is spelled correctly.";
+"lang_add_weather_error_alert_button" = "Ok";
+"lang_add_weather_error_alert_general_title" = "Oops!";
+"lang_add_weather_error_alert_general_description" = "Something went wrong. Try again later.";
+"lang_add_weather_l10n_error_alert_title" = "Oops! Something went wrong.";
+"lang_add_weather_l10n_error_alert_description" = "Unable to get your current location. Please check your location services settings and try again.";
+
 // Weather - Detail
 "lang_detail_temperature" = "Temperature";
 "lang_detail_humidity" = "Humidity";
